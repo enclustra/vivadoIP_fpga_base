@@ -4,7 +4,7 @@
 Waldemar Koprek [waldemar.koprek@psi.ch]
 
 ## Authors
-Oliver Bründler [oli.bruendler@gmx.ch]
+Oliver Bründler [oli.bruendler@gmx.ch]  
 Goran Marinkovic [goran.marinkovic@psi.ch]
 
 ## License
