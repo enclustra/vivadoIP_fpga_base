@@ -1,0 +1,181 @@
+#------------------------------------------------------------------------------
+#-----------            fpga_base Template                     ----------------
+#------------------------------------------------------------------------------
+# $(DEV):         Device name
+# $(SYS):         System name
+# $(FPGABASE):    Offset of the FPGA base component
+# $(BASE):      VME Base address of the FPGA
+
+#------------------------------------------------------------------------------
+# Regular Scanning
+#------------------------------------------------------------------------------
+record(seq, "$(DEV):$(SYS)-VERSION-SCAN0") {
+   field(SCAN, "1 second")
+   field(DLY1, "0.1")
+   field(DLY2, "0.1")
+   field(DLY3, "0.1")
+   field(DLY4, "0.1")
+   field(DLY5, "0.1")
+   field(LNK1, "$(DEV):$(SYS)-VERSION-FW-VERSION PP")
+   field(LNK2, "$(DEV):$(SYS)-VERSION-FW-YEAR PP")
+   field(LNK3, "$(DEV):$(SYS)-VERSION-SW-YEAR PP")
+   field(LNK4, "$(DEV):$(SYS)-VERSION-PROJECT PP")
+   field(LNK5, "$(DEV):$(SYS)-VERSION-FACILITY PP")
+}
+
+#------------------------------------------------------------------------------
+# Version Firmware/Software
+#------------------------------------------------------------------------------
+record (longin,"$(DEV):$(SYS)-VERSION-FW-VERSION"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x00 T=uint32")
+   field(PRIO, "HIGH")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-FW-YEAR"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x04 T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-YEAR-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-FW-YEAR-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-FW-YEAR")
+   field(CALC, "PRINTF('%4d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-MONTH")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-FW-MONTH"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x08 T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-MONTH-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-FW-MONTH-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-FW-MONTH")
+   field(CALC, "PRINTF('%02d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-DAY")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-FW-DAY"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x0C T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-DAY-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-FW-DAY-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-FW-DAY")
+   field(CALC, "PRINTF('%02d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-HOUR")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-FW-HOUR"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x10 T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-HOUR-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-FW-HOUR-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-FW-HOUR")
+   field(CALC, "PRINTF('%02d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-MINUTE")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-FW-MINUTE"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x14 T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-MINUTE-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-FW-MINUTE-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-FW-MINUTE")
+   field(CALC, "PRINTF('%02d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-FW-DATE")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-FW-DATE"){
+   field(INAA, "$(DEV):$(SYS)-VERSION-FW-YEAR-S.SVAL")
+   field(INBB, "$(DEV):$(SYS)-VERSION-FW-MONTH-S.SVAL")
+   field(INCC, "$(DEV):$(SYS)-VERSION-FW-DAY-S.SVAL")
+   field(INDD, "$(DEV):$(SYS)-VERSION-FW-HOUR-S.SVAL")
+   field(INEE, "$(DEV):$(SYS)-VERSION-FW-MINUTE-S.SVAL")
+   field(CALC, "AA+'.'+BB+'.'+CC+' '+DD+':'+EE")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-SW-YEAR"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x18 T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-YEAR-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-SW-YEAR-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-SW-YEAR")
+   field(CALC, "PRINTF('%4d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-MONTH")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-SW-MONTH"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x1C T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-MONTH-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-SW-MONTH-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-SW-MONTH")
+   field(CALC, "PRINTF('%02d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-DAY")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-SW-DAY"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x20 T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-DAY-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-SW-DAY-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-SW-DAY")
+   field(CALC, "PRINTF('%02d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-HOUR")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-SW-HOUR"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x24 T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-HOUR-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-SW-HOUR-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-SW-HOUR")
+   field(CALC, "PRINTF('%02d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-MINUTE")
+}
+
+record(longin,"$(DEV):$(SYS)-VERSION-SW-MINUTE"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x28 T=uint32")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-MINUTE-S")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-SW-MINUTE-S"){
+   field(INPA, "$(DEV):$(SYS)-VERSION-SW-MINUTE")
+   field(CALC, "PRINTF('%02d',A)")
+   field(FLNK, "$(DEV):$(SYS)-VERSION-SW-DATE")
+}
+
+record(scalcout,"$(DEV):$(SYS)-VERSION-SW-DATE"){
+   field(INAA, "$(DEV):$(SYS)-VERSION-SW-YEAR-S.SVAL")
+   field(INBB, "$(DEV):$(SYS)-VERSION-SW-MONTH-S.SVAL")
+   field(INCC, "$(DEV):$(SYS)-VERSION-SW-DAY-S.SVAL")
+   field(INDD, "$(DEV):$(SYS)-VERSION-SW-HOUR-S.SVAL")
+   field(INEE, "$(DEV):$(SYS)-VERSION-SW-MINUTE-S.SVAL")
+   field(CALC, "AA+'.'+BB+'.'+CC+' '+DD+':'+EE")
+}
+
+record(stringin,"$(DEV):$(SYS)-VERSION-PROJECT"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x40 L=16")
+}
+
+record(stringin,"$(DEV):$(SYS)-VERSION-FACILITY"){
+   field(DTYP, "regDev")
+   field(INP,  "@$(BASE):$(FPGABASE)+0x50 L=16")
+}
