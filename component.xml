@@ -3,7 +3,7 @@
   <spirit:vendor>psi.ch</spirit:vendor>
   <spirit:library>PSI</spirit:library>
   <spirit:name>fpga_base</spirit:name>
-  <spirit:version>1.3</spirit:version>
+  <spirit:version>1.4</spirit:version>
   <spirit:busInterfaces>
     <spirit:busInterface>
       <spirit:name>s00_axi</spirit:name>
@@ -370,7 +370,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>e3948681</spirit:value>
+            <spirit:value>487c3cc3</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -386,7 +386,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>e3948681</spirit:value>
+            <spirit:value>487c3cc3</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -400,7 +400,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>88ece613</spirit:value>
+            <spirit:value>6ede7e84</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1116,6 +1116,11 @@
         <spirit:displayName>C Version Minor</spirit:displayName>
         <spirit:value spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_VERSION_MINOR">No Project</spirit:value>
       </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="boolean">
+        <spirit:name>C_USE_INFO_FROM_SCRIPT</spirit:name>
+        <spirit:displayName>C Use Info From Script</spirit:displayName>
+        <spirit:value spirit:format="bool" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_USE_INFO_FROM_SCRIPT">false</spirit:value>
+      </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_S00_AXI_ID_WIDTH</spirit:name>
         <spirit:displayName>C S00 Axi Id Width</spirit:displayName>
@@ -1136,38 +1141,43 @@
       <spirit:file>
         <spirit:name>hdl/fpga_base_date_package.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/fpga_base_scripted_info_pkg.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_array_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_math_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_logic_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_pl_stage.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_axi_slave_ipif.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/fpga_base_v1_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_ca61286d</spirit:userFileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:userFileType>CHECKSUM_cc680e84</spirit:userFileType>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1175,45 +1185,50 @@
       <spirit:file>
         <spirit:name>hdl/fpga_base_date_package.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/fpga_base_scripted_info_pkg.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_array_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_math_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_logic_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_pl_stage.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>../../VHDL/psi_common/hdl/psi_common_axi_slave_ipif.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>hdl/fpga_base_v1_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>fpga_base_1_3</spirit:logicalName>
+        <spirit:logicalName>fpga_base_1_4</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/fpga_base_v1_3.tcl</spirit:name>
+        <spirit:name>xgui/fpga_base_v1_4.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_88ece613</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_6ede7e84</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1248,7 +1263,7 @@
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
-  <spirit:description>FPGA Version informatin (SW and FW build date)</spirit:description>
+  <spirit:description>FPGA Version information (SW and FW build date)</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
       <spirit:name>C_VERSION</spirit:name>
@@ -1257,13 +1272,18 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_VERSION_MAJOR</spirit:name>
-      <spirit:displayName>Device name (max 16 char)</spirit:displayName>
+      <spirit:displayName>Major version (max 16 char)</spirit:displayName>
       <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_VERSION_MAJOR">No Device</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_VERSION_MINOR</spirit:name>
-      <spirit:displayName>Project name (max 16 char)</spirit:displayName>
+      <spirit:displayName>Minor version (max 16 char)</spirit:displayName>
       <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_VERSION_MINOR">No Project</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_USE_INFO_FROM_SCRIPT</spirit:name>
+      <spirit:displayName>Use Build-Info from Python Script (not from Vivado TCL)</spirit:displayName>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.C_USE_INFO_FROM_SCRIPT">false</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_S00_AXI_ID_WIDTH</spirit:name>
@@ -1302,27 +1322,37 @@
       <xilinx:taxonomies>
         <xilinx:taxonomy>/UserIP</xilinx:taxonomy>
       </xilinx:taxonomies>
-      <xilinx:displayName>fpga_base_1_3</xilinx:displayName>
+      <xilinx:displayName>fpga_base_1_4</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:vendorDisplayName>Paul Scherrer Institut</xilinx:vendorDisplayName>
+      <xilinx:vendorDisplayName>Paul Scherrer Institute</xilinx:vendorDisplayName>
       <xilinx:vendorURL>http://www.psi.ch</xilinx:vendorURL>
-      <xilinx:coreRevision>1563783149</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2019-07-22T08:13:13Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>1579854955</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2020-01-24T08:36:27Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
-        <xilinx:tag xilinx:name="psi.ch:user:fpga_base_v1_0:1.0_ARCHIVE_LOCATION">d:/gfa/Libraries/Firmware/VivadoIp/fpga_base</xilinx:tag>
-        <xilinx:tag xilinx:name="psi.ch:user:fpga_base:1.0_ARCHIVE_LOCATION">d:/gfa/Libraries/Firmware/VivadoIp/fpga_base</xilinx:tag>
-        <xilinx:tag xilinx:name="psi.ch:PSI:fpga_base:1.0_ARCHIVE_LOCATION">d:/gfa/Libraries/Firmware/VivadoIp/fpga_base</xilinx:tag>
-        <xilinx:tag xilinx:name="psi.ch:PSI:fpga_base:1.3_ARCHIVE_LOCATION">d:/gfa/Libraries/Firmware/VivadoIp/fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@285b3c53_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1421ff8c_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c9c2424_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ddb705d_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@32fbf344_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@12a2c237_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4eebff13_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3d110e92_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@34efd119_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@317e48c8_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64765a64_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@74d36514_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a51b1ae_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@38469a4e_ARCHIVE_LOCATION">c:/work/psi_fpga_all/VivadoIp/vivadoIP_fpga_base</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
-      <xilinx:xilinxVersion>2018.1</xilinx:xilinxVersion>
+      <xilinx:xilinxVersion>2019.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="51cb901c"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="a9f63fc9"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b69eb294"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="93c4e7c5"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="648d2348"/>
-      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="2fa90622"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="ab5e3e2c"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="38bbcb94"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="f5a96d43"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>
