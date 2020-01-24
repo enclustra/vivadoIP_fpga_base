@@ -77,15 +77,16 @@ def FpgaBaseUpdateVersion(gitRepo : str, verbose : bool = False):
     ReplaceInTaggedLine(VERSION_FILE, "githash", r'"[0-9a-fA-F]*"', '"{}"'.format(commitHash8))
     buildDate = dt.datetime.now()
     if verbose: print("FpgaBaseUpdateVersion():Build Date:       ", "{:04}.{:02}.{:02} {:02}:{:02}".format(buildDate.year, buildDate.month, buildDate.day, buildDate.hour, buildDate.minute))
-    ReplaceInTaggedLine(VERSION_FILE, "year", r'"[0-9]*"', '"{}"'.format(buildDate.year))
-    ReplaceInTaggedLine(VERSION_FILE, "month", r'"[0-9]*"', '"{}"'.format(buildDate.month))
-    ReplaceInTaggedLine(VERSION_FILE, "day", r'"[0-9]*"', '"{}"'.format(buildDate.day))
-    ReplaceInTaggedLine(VERSION_FILE, "hour", r'"[0-9]*"', '"{}"'.format(buildDate.hour))
-    ReplaceInTaggedLine(VERSION_FILE, "minute", r'"[0-9]*"', '"{}"'.format(buildDate.minute))
+    ReplaceInTaggedLine(VERSION_FILE, "year", r'= [0-9]*;', '= {};'.format(buildDate.year))
+    ReplaceInTaggedLine(VERSION_FILE, "month", r'= [0-9]*;', '= {};'.format(buildDate.month))
+    ReplaceInTaggedLine(VERSION_FILE, "day", r'= [0-9]*;', '= {};'.format(buildDate.day))
+    ReplaceInTaggedLine(VERSION_FILE, "hour", r'= [0-9]*;', '= {};'.format(buildDate.hour))
+    ReplaceInTaggedLine(VERSION_FILE, "minute", r'= [0-9]*;', '= {};'.format(buildDate.minute))
 
 
     # Ignore scripted changes in GIT
-    repo.git.execute(["git", "update-index", "--assume-unchanged", os.path.abspath(VERSION_FILE)])
+    ipRepo = git.Repo(FILEPATH + "/..")
+    ipRepo.git.execute(["git", "update-index", "--assume-unchanged", os.path.abspath(VERSION_FILE)])
 
 if __name__ == "__main__":
     FpgaBaseUpdateVersion("..", verbose=True)
