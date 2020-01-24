@@ -217,7 +217,7 @@ begin
    -- Version of the firmware assigned by user.
    -----------------------------------------------------------------------------
    reg_rdata( 0)                  <= C_VERSION when not C_USE_INFO_FROM_SCRIPT else 
-                                     std_logic_vector(to_unsigned(BuildGitHash_c, 32));
+                                     BuildGitHash_c;
 
    -----------------------------------------------------------------------------
    -- Firmware compilation date and time. This values are set during synthesis
