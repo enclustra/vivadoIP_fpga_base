@@ -56,10 +56,10 @@ gui_add_page "Configuration"
 gui_create_parameter "C_VERSION" "Version"
 gui_add_parameter
 
-gui_create_parameter "C_VERSION_MAJOR" "Device name (max 16 char)"
+gui_create_parameter "C_VERSION_MAJOR" "Major version (max 16 char)"
 gui_add_parameter
 
-gui_create_parameter "C_VERSION_MINOR" "Project name (max 16 char)"
+gui_create_parameter "C_VERSION_MINOR" "Minor version (max 16 char)"
 gui_add_parameter
 
 gui_create_parameter "C_USE_INFO_FROM_SCRIPT" "Use Build-Info from Python Script (not from Vivado TCL)"
