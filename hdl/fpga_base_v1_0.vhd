@@ -31,13 +31,10 @@ entity fpga_base_v1_0 is
       C_VERSION                   : std_logic_vector := X"FFFFFFFF";
       C_VERSION_MAJOR             : string  := "No Device";
       C_VERSION_MINOR             : string  := "No Project";
-<<<<<<< HEAD
       -- Blinking LED
       C_FREQ_AXI_CLK_HZ           : integer := 125_000_000;
       C_FREQ_BLINKING_LED_HZ      : integer := 2;
-=======
       C_USE_INFO_FROM_SCRIPT      : boolean := false;
->>>>>>> origin/ScriptedVersionUpdate
       -- Parameters of Axi Slave Bus Interface
       C_S00_AXI_ID_WIDTH          : integer := 1                             -- Width of ID for for write address, write data, read address and read data
    );
