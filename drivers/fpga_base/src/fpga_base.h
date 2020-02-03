@@ -14,6 +14,10 @@
 #ifndef fpga_base_H
 #define fpga_base_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Include files */
 #include <stdint.h>
 #include <xil_io.h>
@@ -100,6 +104,10 @@ void fpga_base_set_led(uint32_t base_addr, uint8_t val);
 uint8_t fpga_base_read_dip(uint32_t base_addr);
 void fpga_base_version(uint32_t base_addr);
 void fpga_base_print(uint32_t base_addr);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* fpga_base_H */
 

@@ -8,7 +8,7 @@ namespace import -force psi::ip_package::latest::*
 # General Information
 ###############################################################
 set IP_NAME fpga_base
-set IP_VERSION 1.3
+set IP_VERSION 1.4
 set IP_REVISION "auto"
 set IP_LIBRARY PSI
 set IP_DESCIRPTION "FPGA Version informatin (SW and FW build date)"
@@ -61,10 +61,27 @@ gui_add_parameter
 gui_create_parameter "C_VERSION_MINOR" "Project name (max 16 char)"
 gui_add_parameter
 
+gui_create_parameter "C_FREQ_AXI_CLK_HZ" "AXI clock frequency in Hz"
+gui_add_parameter
+
+gui_create_parameter "C_FREQ_BLINKING_LED_HZ" "Blinking led frequency in Hz)"
+gui_add_parameter
+
+gui_create_user_parameter "IMPL_BLINK" boolean true "Implement Blinking LED"
+gui_add_parameter
+
+gui_create_user_parameter "IMPL_SWITCH" boolean true "Implement Switch inputs"
+gui_add_parameter
+
+gui_create_user_parameter "IMPL_LED" boolean true "Implement LED outputs"
+gui_add_parameter
+
 ###############################################################
 # Optional Ports
 ###############################################################
-
+add_port_enablement_condition "o_blink" "\$IMPL_BLINK"
+add_port_enablement_condition "o_led" "\$IMPL_LED"
+add_port_enablement_condition "i_sw" "\$IMPL_SWITCH"
 #None
 
 ###############################################################
