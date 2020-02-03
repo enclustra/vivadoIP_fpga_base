@@ -6,11 +6,15 @@ proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "C_VERSION" -parent ${Configuration}
   ipgui::add_param $IPINST -name "C_VERSION_MAJOR" -parent ${Configuration}
   ipgui::add_param $IPINST -name "C_VERSION_MINOR" -parent ${Configuration}
+<<<<<<< HEAD:xgui/fpga_base_v1_4.tcl
   ipgui::add_param $IPINST -name "C_FREQ_AXI_CLK_HZ" -parent ${Configuration}
   ipgui::add_param $IPINST -name "C_FREQ_BLINKING_LED_HZ" -parent ${Configuration}
   ipgui::add_param $IPINST -name "IMPL_BLINK" -parent ${Configuration}
   ipgui::add_param $IPINST -name "IMPL_SWITCH" -parent ${Configuration}
   ipgui::add_param $IPINST -name "IMPL_LED" -parent ${Configuration}
+=======
+  ipgui::add_param $IPINST -name "C_USE_INFO_FROM_SCRIPT" -parent ${Configuration}
+>>>>>>> origin/ScriptedVersionUpdate:xgui/fpga_base_v1_3.tcl
 
 
 }
@@ -39,6 +43,15 @@ proc update_PARAM_VALUE.C_S00_AXI_ID_WIDTH { PARAM_VALUE.C_S00_AXI_ID_WIDTH } {
 
 proc validate_PARAM_VALUE.C_S00_AXI_ID_WIDTH { PARAM_VALUE.C_S00_AXI_ID_WIDTH } {
 	# Procedure called to validate C_S00_AXI_ID_WIDTH
+	return true
+}
+
+proc update_PARAM_VALUE.C_USE_INFO_FROM_SCRIPT { PARAM_VALUE.C_USE_INFO_FROM_SCRIPT } {
+	# Procedure called to update C_USE_INFO_FROM_SCRIPT when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.C_USE_INFO_FROM_SCRIPT { PARAM_VALUE.C_USE_INFO_FROM_SCRIPT } {
+	# Procedure called to validate C_USE_INFO_FROM_SCRIPT
 	return true
 }
 
@@ -112,6 +125,7 @@ proc update_MODELPARAM_VALUE.C_VERSION_MINOR { MODELPARAM_VALUE.C_VERSION_MINOR 
 	set_property value [get_property value ${PARAM_VALUE.C_VERSION_MINOR}] ${MODELPARAM_VALUE.C_VERSION_MINOR}
 }
 
+<<<<<<< HEAD:xgui/fpga_base_v1_4.tcl
 proc update_MODELPARAM_VALUE.C_FREQ_AXI_CLK_HZ { MODELPARAM_VALUE.C_FREQ_AXI_CLK_HZ PARAM_VALUE.C_FREQ_AXI_CLK_HZ } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
 	set_property value [get_property value ${PARAM_VALUE.C_FREQ_AXI_CLK_HZ}] ${MODELPARAM_VALUE.C_FREQ_AXI_CLK_HZ}
@@ -120,6 +134,11 @@ proc update_MODELPARAM_VALUE.C_FREQ_AXI_CLK_HZ { MODELPARAM_VALUE.C_FREQ_AXI_CLK
 proc update_MODELPARAM_VALUE.C_FREQ_BLINKING_LED_HZ { MODELPARAM_VALUE.C_FREQ_BLINKING_LED_HZ PARAM_VALUE.C_FREQ_BLINKING_LED_HZ } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
 	set_property value [get_property value ${PARAM_VALUE.C_FREQ_BLINKING_LED_HZ}] ${MODELPARAM_VALUE.C_FREQ_BLINKING_LED_HZ}
+=======
+proc update_MODELPARAM_VALUE.C_USE_INFO_FROM_SCRIPT { MODELPARAM_VALUE.C_USE_INFO_FROM_SCRIPT PARAM_VALUE.C_USE_INFO_FROM_SCRIPT } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.C_USE_INFO_FROM_SCRIPT}] ${MODELPARAM_VALUE.C_USE_INFO_FROM_SCRIPT}
+>>>>>>> origin/ScriptedVersionUpdate:xgui/fpga_base_v1_3.tcl
 }
 
 proc update_MODELPARAM_VALUE.C_S00_AXI_ID_WIDTH { MODELPARAM_VALUE.C_S00_AXI_ID_WIDTH PARAM_VALUE.C_S00_AXI_ID_WIDTH } {

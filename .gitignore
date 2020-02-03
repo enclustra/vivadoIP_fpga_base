@@ -3,3 +3,7 @@
 
 #Packaging artifacts
 scripts/package_prj
+xgui/fpga_base_v1_0_v1_0.tcl
+
+#PyCharm Files
+**/.idea

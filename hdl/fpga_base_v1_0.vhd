@@ -22,6 +22,7 @@ use unisim.vcomponents.all;
 library work;
 use work.fpga_base_date_package.all;
 use work.psi_common_array_pkg.all;
+use work.fpga_base_scripted_info_pkg.all;
 
 entity fpga_base_v1_0 is
    generic
@@ -30,9 +31,13 @@ entity fpga_base_v1_0 is
       C_VERSION                   : std_logic_vector := X"FFFFFFFF";
       C_VERSION_MAJOR             : string  := "No Device";
       C_VERSION_MINOR             : string  := "No Project";
+<<<<<<< HEAD
       -- Blinking LED
       C_FREQ_AXI_CLK_HZ           : integer := 125_000_000;
       C_FREQ_BLINKING_LED_HZ      : integer := 2;
+=======
+      C_USE_INFO_FROM_SCRIPT      : boolean := false;
+>>>>>>> origin/ScriptedVersionUpdate
       -- Parameters of Axi Slave Bus Interface
       C_S00_AXI_ID_WIDTH          : integer := 1                             -- Width of ID for for write address, write data, read address and read data
    );
@@ -228,7 +233,8 @@ begin
    -----------------------------------------------------------------------------
    -- Version of the firmware assigned by user.
    -----------------------------------------------------------------------------
-   reg_rdata( 0)                  <= C_VERSION;
+   reg_rdata( 0)                  <= C_VERSION when not C_USE_INFO_FROM_SCRIPT else 
+                                     BuildGitHash_c;
 
    -----------------------------------------------------------------------------
    -- Firmware compilation date and time. This values are set during synthesis
@@ -236,6 +242,14 @@ begin
    -- time the code is compiled.
    -----------------------------------------------------------------------------
    fpga_base_date_inst: entity work.fpga_base_date
+   generic map (
+      C_DATE_YEAR           => BuildYear_c,
+      C_DATE_MONTH          => BuildMonth_c,
+      C_DATE_DAY            => BuildDay_c,
+      C_DATE_HOUR           => BuildHour_c,
+      C_DATE_MINUTE         => BuildMinute_c,
+      C_USE_GENERIC_DATE    => C_USE_INFO_FROM_SCRIPT
+   )
    port map
    (
       --------------------------------------------------------------------------

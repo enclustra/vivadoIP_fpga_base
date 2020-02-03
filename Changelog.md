@@ -1,3 +1,6 @@
+## 1.4.0
+* Added option to update build information from python script
+
 ## 1.3.1
 * Added documentation
 * Open source release on GitHub

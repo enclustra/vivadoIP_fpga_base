@@ -12,6 +12,7 @@
 -- Std. library (platform) -----------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 package fpga_base_date_package is
 
@@ -25,7 +26,8 @@ package fpga_base_date_package is
       C_DATE_MONTH                : integer := 11;
       C_DATE_DAY                  : integer := 3;
       C_DATE_HOUR                 : integer := 19;
-      C_DATE_MINUTE               : integer := 49
+      C_DATE_MINUTE               : integer := 49;
+      C_USE_GENERIC_DATE          : boolean := false
    );
    port
    (
@@ -52,6 +54,7 @@ end package fpga_base_date_package;
 -- Std. library (platform) -----------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 -- Work library (platform) -----------------------------------------------------
 library unisim;
@@ -66,7 +69,8 @@ entity fpga_base_date is
       C_DATE_MONTH                : integer := 11;
       C_DATE_DAY                  : integer := 3;
       C_DATE_HOUR                 : integer := 19;
-      C_DATE_MINUTE               : integer := 49
+      C_DATE_MINUTE               : integer := 49;
+      C_USE_GENERIC_DATE          : boolean := false
    );
    port
    (
@@ -87,6 +91,12 @@ end entity fpga_base_date;
 
 architecture structural of fpga_base_date is
 
+    signal year     : std_logic_vector(31 downto  0);
+    signal month    : std_logic_vector(31 downto  0);
+    signal day      : std_logic_vector(31 downto  0);
+    signal hour     : std_logic_vector(31 downto  0);
+    signal minute   : std_logic_vector(31 downto  0);
+
 begin
 
    gen_year : for count in 0 to 31 generate
@@ -101,7 +111,7 @@ begin
          CE                       => '0',
          C                        => i_clk,
          D                        => '0',
-         Q                        => o_year(count)
+         Q                        => year(count)
       );
 
    end generate;
@@ -118,7 +128,7 @@ begin
          CE                       => '0',
          C                        => i_clk,
          D                        => '0',
-         Q                        => o_month(count)
+         Q                        => month(count)
       );
 
    end generate;
@@ -135,7 +145,7 @@ begin
          CE                       => '0',
          C                        => i_clk,
          D                        => '0',
-         Q                        => o_day(count)
+         Q                        => day(count)
       );
 
    end generate;
@@ -152,7 +162,7 @@ begin
          CE                       => '0',
          C                        => i_clk,
          D                        => '0',
-         Q                        => o_hour(count)
+         Q                        => hour(count)
       );
 
    end generate;
@@ -169,11 +179,29 @@ begin
          CE                       => '0',
          C                        => i_clk,
          D                        => '0',
-         Q                        => o_minute(count)
+         Q                        => minute(count)
       );
 
    end generate;
-
+   
+   g_generics : if C_USE_GENERIC_DATE generate
+   begin
+      o_year <= std_logic_vector(to_unsigned(C_DATE_YEAR, 32));
+      o_month <= std_logic_vector(to_unsigned(C_DATE_MONTH, 32));
+      o_day <= std_logic_vector(to_unsigned(C_DATE_DAY, 32));
+      o_hour <= std_logic_vector(to_unsigned(C_DATE_HOUR, 32));
+      o_minute <= std_logic_vector(to_unsigned(C_DATE_MINUTE, 32));
+   end generate;
+   
+   g_ngenerics : if not C_USE_GENERIC_DATE generate
+   begin
+      o_year <= year;
+      o_month <= month;
+      o_day <= day;
+      o_hour <= hour;
+      o_minute <= minute;
+   end generate;
+   
 end structural;
 
 --------------------------------------------------------------------------------
