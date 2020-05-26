@@ -3,3 +3,6 @@
 
 #Packaging artifacts
 scripts/package_prj
+
+#Artifacts from scripted version number update
+*.pyc
