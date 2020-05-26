@@ -22,6 +22,7 @@ use unisim.vcomponents.all;
 library work;
 use work.fpga_base_date_package.all;
 use work.psi_common_array_pkg.all;
+use work.fpga_base_scripted_info_pkg.all;
 
 entity fpga_base_v1_0 is
    generic
@@ -30,6 +31,10 @@ entity fpga_base_v1_0 is
       C_VERSION                   : std_logic_vector := X"FFFFFFFF";
       C_VERSION_MAJOR             : string  := "No Device";
       C_VERSION_MINOR             : string  := "No Project";
+      -- Blinking LED
+      C_FREQ_AXI_CLK_HZ           : integer := 125_000_000;
+      C_FREQ_BLINKING_LED_HZ      : integer := 2;
+      C_USE_INFO_FROM_SCRIPT      : boolean := false;
       -- Parameters of Axi Slave Bus Interface
       C_S00_AXI_ID_WIDTH          : integer := 1                             -- Width of ID for for write address, write data, read address and read data
    );
@@ -43,6 +48,10 @@ entity fpga_base_v1_0 is
       -- DIP switch interface
       --------------------------------------------------------------------------
       i_sw                        : in    std_logic_vector( 7 downto  0);
+      --------------------------------------------------------------------------
+      -- Blinking LED interface
+      --------------------------------------------------------------------------
+      o_blink                     : out   std_logic;
       --------------------------------------------------------------------------
       -- Axi Slave Bus Interface
       --------------------------------------------------------------------------
@@ -115,6 +124,13 @@ architecture arch_imp of fpga_base_v1_0 is
    signal   reg_rdata             : t_aslv32(0 to C_NUM_REG-1) := (others => (others => '0'));
    signal   reg_wr                : std_logic_vector(C_NUM_REG-1 downto  0) := (others => '0');
    signal   reg_wdata             : t_aslv32(0 to C_NUM_REG-1) := (others => (others => '0'));
+   -----------------------------------------------------------------------------
+   -- Blinking LED
+   -----------------------------------------------------------------------------
+   constant C_BLINK_RATIO         : integer := C_FREQ_AXI_CLK_HZ/C_FREQ_BLINKING_LED_HZ;
+   constant C_BLINK_CNT_MAX       : integer := C_BLINK_RATIO/2-1;
+   signal   blink_cnt             : integer range 0 to C_BLINK_CNT_MAX;
+   signal   blink_led             : std_logic;
 
 begin
 
@@ -214,7 +230,8 @@ begin
    -----------------------------------------------------------------------------
    -- Version of the firmware assigned by user.
    -----------------------------------------------------------------------------
-   reg_rdata( 0)                  <= C_VERSION;
+   reg_rdata( 0)                  <= C_VERSION when not C_USE_INFO_FROM_SCRIPT else 
+                                     BuildGitHash_c;
 
    -----------------------------------------------------------------------------
    -- Firmware compilation date and time. This values are set during synthesis
@@ -222,6 +239,14 @@ begin
    -- time the code is compiled.
    -----------------------------------------------------------------------------
    fpga_base_date_inst: entity work.fpga_base_date
+   generic map (
+      C_DATE_YEAR           => BuildYear_c,
+      C_DATE_MONTH          => BuildMonth_c,
+      C_DATE_DAY            => BuildDay_c,
+      C_DATE_HOUR           => BuildHour_c,
+      C_DATE_MINUTE         => BuildMinute_c,
+      C_USE_GENERIC_DATE    => C_USE_INFO_FROM_SCRIPT
+   )
    port map
    (
       --------------------------------------------------------------------------
@@ -265,7 +290,28 @@ begin
    -----------------------------------------------------------------------------
    reg_rdata(24)( 7 downto  0)    <= reg_wdata(24)( 7 downto  0);
    o_led                          <= reg_wdata(24)( 7 downto  0);
-
+   
+   -----------------------------------------------------------------------------
+   -- BLINKING LED
+   -----------------------------------------------------------------------------
+   p_blink : process(s00_axi_aclk)
+   begin
+      if rising_edge(s00_axi_aclk) then
+         if s00_axi_aresetn = '0' then
+            blink_cnt <= 0;
+            blink_led <= '0';
+         else
+            if blink_cnt = C_BLINK_CNT_MAX then
+               blink_cnt <= 0;
+               blink_led <= not blink_led;
+            else
+               blink_cnt <= blink_cnt + 1;
+            end if;
+         end if;
+      end if;
+   end process;
+   o_blink <= blink_led;
+   
    -----------------------------------------------------------------------------
    -- DIP switch interface
    -----------------------------------------------------------------------------
