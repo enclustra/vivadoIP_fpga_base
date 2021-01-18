@@ -278,11 +278,11 @@ begin
    -- Add project and facility strings to registers
    -----------------------------------------------------------------------------
    c_version_major_gen_loop: for i in 0 to (C_VERSION_MAJOR'high - 1) generate
-      reg_rdata(16 + (i / 4))(((3 - (i rem 4)) * 8 + 7) downto ((3 - (i rem 4)) * 8)) <= std_logic_vector(to_unsigned(character'pos(C_VERSION_MAJOR(i + 1)), 8));
+      reg_rdata(16 + (i / 4))(((i rem 4) * 8 + 7) downto ((i rem 4) * 8)) <= std_logic_vector(to_unsigned(character'pos(C_VERSION_MAJOR(i + 1)), 8));
    end generate;
 
    c_version_minor_gen_loop: for i in 0 to (C_VERSION_MINOR'high - 1) generate
-      reg_rdata(20 + (i / 4))(((3 - (i rem 4)) * 8 + 7) downto ((3 - (i rem 4)) * 8)) <= std_logic_vector(to_unsigned(character'pos(C_VERSION_MINOR(i + 1)), 8));
+      reg_rdata(20 + (i / 4))(((i rem 4) * 8 + 7) downto ((i rem 4) * 8)) <= std_logic_vector(to_unsigned(character'pos(C_VERSION_MINOR(i + 1)), 8));
    end generate;
 
    -----------------------------------------------------------------------------
