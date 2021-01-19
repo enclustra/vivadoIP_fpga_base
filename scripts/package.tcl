@@ -8,7 +8,7 @@ namespace import -force psi::ip_package::latest::*
 # General Information
 ###############################################################
 set IP_NAME fpga_base
-set IP_VERSION 1.4
+set IP_VERSION 2.0
 set IP_REVISION "auto"
 set IP_LIBRARY PSI
 set IP_DESCIRPTION "FPGA Version information (SW and FW build date)"
@@ -94,7 +94,7 @@ add_port_enablement_condition "i_sw" "\$IMPL_SWITCH"
 ###############################################################
 set TargetDir ".."
 #											Edit  Synth	
-package_ip $TargetDir            			false true xc7a200t
+package_ip $TargetDir            			false true
 
 
 
