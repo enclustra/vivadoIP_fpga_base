@@ -53,6 +53,12 @@ entity fpga_base_v1_0 is
       --------------------------------------------------------------------------
       o_blink                     : out   std_logic;
       --------------------------------------------------------------------------
+      -- tcl.pre controlled parameter from top generic:
+      --------------------------------------------------------------------------
+      i_fw_git_version           : in     std_logic_vector(255 downto 0);  -- char, 32 bytes, little endian
+      i_fw_build_date            : in     std_logic_vector(31 downto 0);  -- Format: YYYYMMDD
+      i_fw_build_time            : in     std_logic_vector(31 downto 0);  -- Format: 0000HHMM 
+      --------------------------------------------------------------------------
       -- Axi Slave Bus Interface
       --------------------------------------------------------------------------
       -- System
@@ -283,6 +289,16 @@ begin
 
    c_version_minor_gen_loop: for i in 0 to (C_VERSION_MINOR'high - 1) generate
       reg_rdata(20 + (i / 4))(((i rem 4) * 8 + 7) downto ((i rem 4) * 8)) <= std_logic_vector(to_unsigned(character'pos(C_VERSION_MINOR(i + 1)), 8));
+   end generate;
+
+   -----------------------------------------------------------------------------
+   -- Git Version, build date/time from top generic
+   -----------------------------------------------------------------------------
+   reg_rdata(26) <= i_fw_build_date;
+   reg_rdata(27) <= i_fw_build_time;
+
+   git_version_gen: for i in 0 to 7 generate
+     reg_rdata(28 + i) <= i_fw_git_version(31 + i*32 downto i*32);
    end generate;
 
    -----------------------------------------------------------------------------
